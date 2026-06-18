@@ -1,0 +1,9 @@
+{
+  "high_entropy_threshold": 7.2,
+  "string_preview_limit": 10,
+  "api_preview_limit": 20,
+  "packer_score_medium": 2,
+  "packer_score_high": 4,
+  "max_upload_mb": 50
+}
+

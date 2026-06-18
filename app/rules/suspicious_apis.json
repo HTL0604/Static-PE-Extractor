@@ -1,0 +1,20 @@
+{
+  "apis": [
+    "VirtualAlloc",
+    "WriteProcessMemory",
+    "CreateRemoteThread",
+    "WinExec",
+    "ShellExecuteA",
+    "ShellExecuteW",
+    "URLDownloadToFileA",
+    "URLDownloadToFileW",
+    "InternetOpenA",
+    "InternetOpenW",
+    "InternetReadFile",
+    "RegSetValueExA",
+    "RegSetValueExW",
+    "CreateServiceA",
+    "CreateServiceW"
+  ]
+}
+

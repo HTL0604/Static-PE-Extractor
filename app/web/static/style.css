@@ -1,0 +1,7 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background: #f2f2f2; }
+canvas { margin-top: 20px; max-height: 280px; }
+pre { white-space: pre-wrap; word-break: break-word; margin: 0; }
+

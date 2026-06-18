@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>PE Static Extractor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>PE Static Extractor Dashboard</h1>
+  <form method="post" enctype="multipart/form-data">
+    <label>Input path:</label>
+    <input type="text" name="input_path" placeholder="C:\path\to\file_or_dir" />
+    <label>Upload file:</label>
+    <input type="file" name="file" />
+    <label><input type="checkbox" name="recursive" /> Recursive</label>
+    <button type="submit">Analyze</button>
+  </form>
+  <p>{{ message }}</p>
+  <p><a href="/report">View Report</a></p>
+</body>
+</html>
+

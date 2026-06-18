@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Report</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Analysis Report</h1>
+  <h2>Summary Metrics</h2>
+  <ul>
+    <li>Total: {{ summary.total }}</li>
+    <li>Analyzed: {{ summary.analyzed }}</li>
+    <li>Skipped: {{ summary.skipped }}</li>
+    <li>EXE: {{ summary.exe_count }} / DLL: {{ summary.dll_count }}</li>
+  </ul>
+  <h2>Feature Definitions</h2>
+  <p>Core groups: file, header, section, import/export, strings, resources, signature, derived, packer.</p>
+  <h2>Results</h2>
+  <table>
+    <thead><tr><th>File</th><th>Type</th><th>Imports</th><th>Entropy</th><th>Packed?</th><th>Detail</th></tr></thead>
+    <tbody>
+      {% for r in records %}
+      <tr>
+        <td>{{ r.file_name }}</td>
+        <td>{{ r.pe_type }}</td>
+        <td>{{ r.imported_api_count }}</td>
+        <td>{{ r.max_section_entropy }}</td>
+        <td>{{ r.possible_packed }}</td>
+        <td><a href="/detail/{{ r.record_id }}">view</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h2>Charts</h2>
+  <canvas id="typeChart"></canvas>
+  <canvas id="importsChart"></canvas>
+  <canvas id="entropyChart"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const importsData = {{ imports_chart|tojson }};
+    const entropyData = {{ entropy_chart|tojson }};
+    new Chart(document.getElementById("typeChart"), {
+      type: "bar",
+      data: { labels: ["EXE", "DLL"], datasets: [{ label: "Count", data: [{{ summary.exe_count }}, {{ summary.dll_count }}] }] }
+    });
+    new Chart(document.getElementById("importsChart"), {
+      type: "line",
+      data: { labels: importsData.map(x=>x.file), datasets: [{ label: "Imported APIs per file", data: importsData.map(x=>x.count) }] }
+    });
+    new Chart(document.getElementById("entropyChart"), {
+      type: "line",
+      data: { labels: entropyData.map(x=>x.file), datasets: [{ label: "Max entropy per file", data: entropyData.map(x=>x.entropy) }] }
+    });
+  </script>
+</body>
+</html>
+
